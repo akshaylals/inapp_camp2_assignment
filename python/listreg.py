@@ -33,6 +33,18 @@ print(l1)
 print(list(range(1, 50, 2)))
 
 
+# 6. Program to count Even and odd numbers in a list
+nums = [5, 2, 50, 9, 1, 66, 32, 4]
+odd = 0
+even = 0
+for i in nums:
+    if i % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+print('{} odd, {} even'.format(odd, even))
+
+
 # 1. Write a python program to remove zeros from an IP address("216.08.094.196")
 ip = "216.08.094.196"
 print(ip)
