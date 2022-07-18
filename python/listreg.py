@@ -49,6 +49,7 @@ print('{} odd, {} even'.format(odd, even))
 ip = "216.08.094.196"
 print(ip)
 cleanIP = re.sub(r'\.0+', '.', ip)
+cleanIP = re.sub(r'^0+', '', cleanIP)
 print(cleanIP)
 
 
