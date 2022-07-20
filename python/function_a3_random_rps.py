@@ -59,6 +59,9 @@ for i in range(5):
         print('Player scores')
     else:
         print('Draw')
+
+    print(f'Computer: {computerPoint}')
+    print(f'Player: {playerPoint}')
     
 
 if playerPoint > computerPoint:
