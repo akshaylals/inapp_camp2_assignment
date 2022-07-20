@@ -63,5 +63,7 @@ for i in range(5):
 
 if playerPoint > computerPoint:
     print('Player wins')
-else:
+elif playerPoint < computerPoint:
     print('Computer wins')
+else:
+    print('Draw')
