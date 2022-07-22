@@ -37,7 +37,9 @@ class Patient:
 
 class CMS:
     patients = dict()
+    ops = dict()
     slno = 0
+    opno = 0
 
     @staticmethod
     def register(name, gender, age, dob, blood):
@@ -51,6 +53,13 @@ class CMS:
         print('\nPatient details: ')
         for id, patient in CMS.patients.items():
             print(f'\nID: {id}')
+            patient.printPatientDetails()
+    
+    @staticmethod
+    def listOP():
+        print('\nOP:')
+        for id, patient in CMS.ops.items():
+            print(f'OP No: {id}')
             patient.printPatientDetails()
     
     @staticmethod
@@ -76,15 +85,35 @@ class CMS:
         else:
             print(f'{id} does not exist')
 
+    @staticmethod
+    def admit(id, disease, noOfDays):
+        if CMS.patients.get(id):
+            op = OP(CMS.patients[id].name, CMS.patients[id].gender, CMS.patients[id].age, CMS.patients[id].dob, CMS.patients[id].blood, disease, noOfDays)
+            CMS.opno += 1
+            CMS.ops[CMS.opno] = op
+        else:
+            print(f'{id} does not exist')
+
 
 class OP(Patient):
-    def admit():
-        # disease, no fo days
-        pass
+    def __init__(self, name, gender, age, dob, blood, disease, noOfDays):
+        super().__init__(name, gender, age, dob, blood)
+        self.disease = disease
+        self.noOfDays = noOfDays
+    
+    def printPatientDetails(self):
+        super().printPatientDetails()
+        print(f'Disease: {self.disease}')
+        print(f'No of days: {self.noOfDays}')
 
 
 class NonOP(Patient):
     opTicketNo = 0
+
+    @staticmethod
+    def generateToken():
+        NonOP.opTicketNo += 1
+        return NonOP.opTicketNo
 
 
 
@@ -100,3 +129,9 @@ CMS.listPatients()
 CMS.update(2, 'spiderman', 'M', 12, '10/02/2010', 'B+')
 
 CMS.listPatients()
+
+CMS.admit(2, 'broken leg', 10)
+
+CMS.listOP()
+
+print(NonOP.generateToken())
