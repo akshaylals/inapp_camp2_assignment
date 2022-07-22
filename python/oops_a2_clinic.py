@@ -11,17 +11,8 @@
 # Admit function and Non OP a function to generate an OP Ticket with 
 # incrementing no for every patient
 
-class CMS:
-    patients = dict()
-    slno = 0
 
-    def __printPatientDetails(self):
-        print(f'Name: {self.name}')
-        print(f'Gender: {self.gender}')
-        print(f'Age: {self.age}')
-        print(f'DOB: {self.dob}')
-        print(f'Blood: {self.blood}')
-    
+class Patient:
     def __init__(self, name, gender, age, dob, blood):
         self.name   = name
         self.gender = gender
@@ -29,57 +20,79 @@ class CMS:
         self.dob    = dob
         self.blood  = blood
 
-    def admit(name, gender, age, dob, blood):
-        patient = CMS(name, gender, age, dob, blood)
+    def printPatientDetails(self):
+        print(f'Name: {self.name}')
+        print(f'Gender: {self.gender}')
+        print(f'Age: {self.age}')
+        print(f'DOB: {self.dob}')
+        print(f'Blood: {self.blood}')
+
+    def update(self, name, gender, age, dob, blood):
+        self.name   = name
+        self.gender = gender
+        self.age    = age
+        self.dob    = dob
+        self.blood  = blood
+    
+
+class CMS:
+    patients = dict()
+    slno = 0
+
+    @staticmethod
+    def register(name, gender, age, dob, blood):
+        patient = Patient(name, gender, age, dob, blood)
         CMS.slno += 1
         CMS.patients[CMS.slno] = patient
         return CMS.slno
     
+    @staticmethod
     def listPatients():
         print('\nPatient details: ')
         for id, patient in CMS.patients.items():
             print(f'\nID: {id}')
-            patient.__printPatientDetails()
+            patient.printPatientDetails()
     
+    @staticmethod
     def search(id):
         if CMS.patients.get(id):
             print('Patient details: ')
             print(f'ID: {id}')
-            CMS.patients[id].__printPatientDetails()
+            CMS.patients[id].printPatientDetails()
         else:
             print(f'{id} does not exist')
 
+    @staticmethod
     def delete(id):
         if CMS.patients.get(id):
             del CMS.patients[id]
         else:
             print(f'{id} does not exist')
 
+    @staticmethod
     def update(id, name, gender, age, dob, blood):
         if CMS.patients.get(id):
-            CMS.patients[id].name   = name
-            CMS.patients[id].gender = gender
-            CMS.patients[id].age    = age
-            CMS.patients[id].dob    = dob
-            CMS.patients[id].blood  = blood
+            CMS.patients[id].update(name, gender, age, dob, blood)
         else:
             print(f'{id} does not exist')
 
 
-class OP(CMS):
-    pass
+class OP(Patient):
+    def admit():
+        # disease, no fo days
+        pass
 
 
-class NonOP(CMS):
+class NonOP(Patient):
     opTicketNo = 0
 
 
 
 
-id = CMS.admit('superman', 'M', 12, '01/02/2010', 'O+')
+id = CMS.register('superman', 'M', 12, '01/02/2010', 'O+')
 print(id)
 
-id = CMS.admit('spiderman', 'M', 12, '01/02/2010', 'A+')
+id = CMS.register('spiderman', 'M', 12, '01/02/2010', 'A+')
 print(id)
 
 CMS.listPatients()
