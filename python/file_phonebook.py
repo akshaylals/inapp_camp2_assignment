@@ -39,7 +39,12 @@ def save():
         f.writelines([f'{name},{number}\n' for name, number in contacts.items()])
 
 def searchNo():
-    n = input('Enter number to search: ')
+    while(True):
+        n = input('Enter number to search: ').strip()
+        if re.match(r'\+[0-9]*', n):
+            break
+        else:
+            print('Invalid input')
     for name, number in contacts.items():
         if number == n:
             print(f'Name: {name}')
