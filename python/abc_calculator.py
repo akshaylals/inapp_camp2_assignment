@@ -109,7 +109,8 @@ while(True):
     if opt == 5:
         break
     
-    obj = ops[opt][1]()
+    op, Cls = ops[opt]
+    obj = Cls()
     obj.num1 = Utils.getFloat('Num1: ')
     while(True):
         try:
@@ -118,4 +119,4 @@ while(True):
         except:
             print("Cannot be zero")
 
-    print(ops[opt][0], obj.calculate())
+    print(op, obj.calculate())
