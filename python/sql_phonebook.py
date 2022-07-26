@@ -63,9 +63,8 @@ def searchName():
             'SELECT name, phone FROM Contacts WHERE Name LIKE ?',
             (f'%{n}%')
         )
-    except Exception as e:
+    except:
         print('Failed to fetch contacts')
-        print(e)
     else:
         contacts = myCursor.fetchall()
         if len(contacts) > 0:
